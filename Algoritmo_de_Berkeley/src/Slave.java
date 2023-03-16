@@ -56,19 +56,18 @@ public class Slave extends Thread {
     }
 
     public static void sendMessageTCP(String time) throws UnknownHostException, IOException {
-        BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        Socket slaveSocket = new Socket("localhost", 6789);
 
-        Socket clientSocket = new Socket("localhost", 6789);
+        DataOutputStream outToServer = new DataOutputStream(slaveSocket.getOutputStream());
 
-        DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+        outToServer.writeBytes(time + '\n');
 
-        // BufferedReader inFromServer = new BufferedReader(new
-        // InputStreamReader(clientSocket.getInputStream()));
-
-        String sentence = time;
-        outToServer.writeBytes(sentence + '\n');
-        // modifiedSentence = inFromServer.readLine();
-        // System.out.println("FROM SERVER: " + modifiedSentence);
-        clientSocket.close();
+        // O slave espera a reposta do Master, sendo que ela possui o valor para
+        // a sincronização dos relógios
+        BufferedReader inFromMasterServer = new BufferedReader(new
+        InputStreamReader(slaveSocket.getInputStream()));
+        String timeUpdateValue = inFromMasterServer.readLine();
+        System.out.println("FROM SERVER: " + timeUpdateValue);
+        slaveSocket.close();
     }
 }

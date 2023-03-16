@@ -1,5 +1,3 @@
-import java.time.LocalTime;
-
 public class Clock extends Thread{
     private int hour;
     private int minute;

@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Master {
+    private byte[] hourOfMaster;
 
     Master(){
     }
@@ -21,11 +22,11 @@ public class Master {
                 System.out.println("Thread do clock: morto");
             } 
             // byte[] b = "Testando Broadcast".getBytes();
-            byte[] b = clock.currentTime().getBytes();
+            hourOfMaster = clock.currentTime().getBytes();
             
             // Definindo o endere�o de envio do pacote neste caso o endere�o de broadcast
             InetAddress addr = InetAddress.getByName("255.255.255.255");
-            DatagramPacket pkg = new DatagramPacket(b, b.length, addr, 6001);
+            DatagramPacket pkg = new DatagramPacket(hourOfMaster, hourOfMaster.length, addr, 6001);
             DatagramSocket ds = new DatagramSocket();
 
             System.out.println("ds.send(pkg)");
@@ -50,10 +51,11 @@ public class Master {
 
             System.out.println("Hora do slave: " + clientSentence);
             
-            connectionSocket.close();
-            /*DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
-            capitalizedSentence = clientSentence.toUpperCase() + '\n';
-            outToClient.writeBytes(capitalizedSentence);*/
+            
+            DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
+            String capitalizedSentence = "4:55";
+            outToClient.writeBytes(capitalizedSentence);
+            //connectionSocket.close();
         }
         //welcomeSocket.close();
     }
