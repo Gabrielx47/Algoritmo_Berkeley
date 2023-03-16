@@ -4,34 +4,21 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        /*Clock clock = new Clock(7, 20);
-
-        clock.start();
-
-        System.out.println("Hora atual: " + clock.currentTime());
-        for(int i = 0; i < 10; i++) {
-            System.out.println("hour: " + clock.getHour() + "h:"+ clock.getMinute());
-
-            if(i == 5) {
-                clock = new Clock(8, 0);
-                clock.start();
-                System.out.println("hour: " + clock.getHour() + "h:" + clock.getMinute());
-                System.out.println("Mudei a hora!!");
-                
-            }
-        }*/
-            
+    public static void main(String[] args) throws IOException {        
             Clock clock = new Clock(1, 1);
             clock.start();
             Scanner scan = new Scanner(System.in);
             Master masterServer = new Master();
+            Slave slave1 = new Slave(7, 0, "slave1");
+            Slave slave2 = new Slave(12, 0, "slave2");
 
+            slave1.start();
+            slave2.start();
             System.out.println("masterServer.sendMessageBroadcast();");
             masterServer.sendMessageBroadcast(clock);
-
-            scan.nextLine();
             
+            
+
             System.out.println("masterServer.socketServer();");
             masterServer.socketServer();
     }

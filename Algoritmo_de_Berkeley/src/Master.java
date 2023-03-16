@@ -16,7 +16,7 @@ public class Master {
     public void sendMessageBroadcast(Clock clock){
         try {
             if(clock.isAlive()){
-                System.out.println("Thread do clock: vivo");
+                System.out.println(clock.getName() + ": vivo");
             } else {
                 System.out.println("Thread do clock: morto");
             } 
@@ -31,7 +31,7 @@ public class Master {
             System.out.println("ds.send(pkg)");
             ds.send(pkg);// enviando pacote broadcast
 
-            System.out.print("Close connection !!");
+            System.out.println("Close connection !!");
             //ds.close();
         } catch (Exception e) {
             System.out.println("Nao foi possivel enviar a mensagem");
@@ -48,7 +48,7 @@ public class Master {
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             clientSentence = inFromClient.readLine();
 
-            System.out.println("time: " + clientSentence);
+            System.out.println("hora do slave: " + clientSentence);
             
             connectionSocket.close();
             /*DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
