@@ -46,8 +46,8 @@ public class Slave extends Thread {
             mcs.receive(pkg);// recebendo dados enviados via broadcast
 
             System.out.println(nameOfSlave + ": Já recebeu!!");
-            String data = new String(pkg.getData(), 0, pkg.getLength());
-            System.out.println(nameOfSlave +": Hora do servidor: " + data);
+            String timeOfServer = new String(pkg.getData(), 0, pkg.getLength());
+            System.out.println(nameOfSlave +": Hora do servidor: " + timeOfServer);
             mcs.close();
 
         } catch (Exception e) {

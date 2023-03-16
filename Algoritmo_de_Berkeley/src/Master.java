@@ -43,18 +43,18 @@ public class Master {
         //String capitalizedSentence;
         ServerSocket welcomeSocket = new ServerSocket(6789);
 
-        //while (true) {
+        while (true) {
             Socket connectionSocket = welcomeSocket.accept();
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             clientSentence = inFromClient.readLine();
 
-            System.out.println("hora do slave: " + clientSentence);
+            System.out.println("Hora do slave: " + clientSentence);
             
             connectionSocket.close();
             /*DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
             capitalizedSentence = clientSentence.toUpperCase() + '\n';
             outToClient.writeBytes(capitalizedSentence);*/
-        //}
+        }
         //welcomeSocket.close();
     }
 }
